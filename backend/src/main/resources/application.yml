@@ -1,0 +1,17 @@
+server:
+  port: 8800
+
+spring:
+  datasource:
+    url: jdbc:sqlite:/Users/daryl/Documents/jasmine/code/contact_management/backend/contact.db
+    username:
+    passowrd:
+    driver-class-name: org.sqlite.JDBC
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*Mapper.xml # 配置mapper.xml文件路径
+  type-aliases-package: com.jasmine.model # 实体类包名
+# mybatis 打印SQL, 配置后就会在控制台打印执行的SQL语句
+logging:
+  level:
+    com.jasmine.mapper: debug

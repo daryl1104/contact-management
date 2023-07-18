@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jasmine.mapper.ContactMapper">
+
+    <resultMap id="ContactMap" type="com.jasmine.model.Contact">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="phone_number" property="phoneNumber"/>
+        <result column="wechat" property="wechat"/>
+        <result column="qq" property="qq"/>
+        <result column="email" property="email"/>
+        <result column="address" property="address"/>
+        <result column="gender" property="gender"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+
+    <select id="queryByUserId" resultMap="ContactMap">
+        select * from contact where
+        user_id = #{userId}
+        <if test="offset != null and limit != null">LIMIT #{offset}, #{limit}</if>
+    </select>
+
+    <select id="queryByUserIdAndContactId" resultMap="ContactMap">
+        select * from contact where
+        user_id = #{userId} and id = #{contactId}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.jasmine.model.Contact">
+        insert into contact
+        (name, phone_number,
+        <if test="wechat != null">wechat,</if>
+        <if test="qq != null">qq,</if>
+        <if test="email != null">email,</if>
+        <if test="address != null">address,</if>
+        gender,
+        user_id
+        )
+        values
+        (#{name}, #{phoneNumber},
+        <if test="wechat != null">#{wechat},</if>
+        <if test="qq != null">#{qq},</if>
+        <if test="email != null">#{email},</if>
+        <if test="address != null">#{address},</if>
+        #{gender},
+        #{userId}
+        )
+    </insert>
+
+    <delete id="delete">
+        delete from contact where user_id = #{userId} and id = #{contactId}
+    </delete>
+
+    <update id="update" keyProperty="id" useGeneratedKeys="true">
+        update contact set (
+        name = #{name},
+        phone_number = #{phoneNumber},
+        <if test="wechat != null">wechat = #{wechat},</if>
+        <if test="qq != null">qq = #{qq},</if>
+        <if test="email != null">email = #{email},</if>
+        <if test="address != null">address = #{address},</if>
+        gender = #{gender},
+        user_id = #{userId}
+        ) where id = #{id}
+    </update>
+</mapper>
+
+
