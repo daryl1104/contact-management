@@ -15,8 +15,18 @@
         <button class="button">退出</button>
     </div>
     <!-- sidebar -->
-    <div class="sidebar">
-        <h1>通讯录管理系统</h1>
+    <div class="div-row-flex">
+        <h1 class="h1">通讯录管理系统</h1>
+    </div>
+    <div class="search">
+        <form>
+            <input type="text" name="search" placeholder="search" />
+            <!-- <a href="https://www.baidu.com">
+                <button type="button">添加</button>
+            </a> -->
+            <button onclick="window.open('http://www.baidu.com')">添加</button>
+        </form>
+
         <ul>
             <li>1</li>
             <li>2</li>
@@ -26,12 +36,60 @@
             <li>6</li>
             <li>7</li>
         </ul>
-        <form>
-            <input type="text" placeholder="搜索" />
-        </form>
-        <form>
-            <input type="submit" valua="新增" />
-        </form>
+
+        <div class="length">
+            <form id="add-form" class="contant-flex">
+                <h1>添加联系人</h1>
+                <div>
+                    <label for="area">国家码：</label>
+                    <select style="padding: 12px 12px; margin: 0.5rem;">
+                        <option value="+86">中国</option>
+                        <option value="+853">中国香港</option>
+                        <option value="+852">中国澳门</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="phone">手机号：</label>
+                    <input type="text" placeholder="请输入手机号" required />
+                </div>
+
+                <div>
+                    <label>姓名/昵称：</label>
+                    <input type="text" name="name" placeholder="请输入姓名" />
+                </div>
+                <div>
+                    <label>头像：</label>
+                    <input type="text" name="avatar" placeholder="请输入头像url" />
+                </div>
+
+                <div>
+                    <label>性别：</label>
+                    <span style="padding: 12px 12px; margin: 0.5rem;">男</span><input type="radio" name="gender"
+                        value="男" />
+                    <span style="padding: 12px 12px; margin: 0.5rem;">女</span><input type="radio" name="gender"
+                        value="女" />
+                </div>
+
+                <div>
+                    <label>地址：</label>
+                    <input type="text" name="address" placeholder="请输入联系人地址" />
+                </div>
+
+                <div>
+                    <label>微信号：</label>
+                    <input type="text" name="wechat" placeholder="请输入微信号" />
+                </div>
+                <div>
+                    <label>邮箱：</label>
+                    <input type="text" name="email" placeholder="请输入邮箱" />
+                </div>
+
+
+                <button type="button" onclick="提交成功">提交</button>
+            </form>
+        </div>
+
     </div>
     <!-- detail -->
     <div>
