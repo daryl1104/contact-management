@@ -1,0 +1,47 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+.flex-div {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+div>p {
+    font-size: 2rem;
+    color: black;
+
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-col-center {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form>* {
+    display: block;
+    margin-top: 0.5rem;
+}
+
+form>input {
+    height: 20px;
+}
+
+.color {
+    background-color: beige;
+}
