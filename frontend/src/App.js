@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import Login from './container/Login';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import Register from './container/Register';
+import Protected from './container/Homepage';
+import Detail from './container/Detail';
+import Index from './container/Index';
+import { AuthProvider } from './container/useAuth';
+
+function App({ children }) {
+  // const [token, setToken] = useState(null);
+  // const [currentUsername, setCurrentUsername] = useState(null);
+    
+  // if (!token) {
+  //     return <Login saveToken={setToken} saveCurrent={setCurrentUsername}/>
+  // }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Outlet />
   );
 }
 

@@ -1,7 +1,12 @@
 package com.jasmine.filter;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+
+import javax.servlet.ReadListener;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import java.io.*;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,15 +19,69 @@ import java.util.Vector;
  */
 public class CustomRequestParamWrapper extends HttpServletRequestWrapper {
     private Map<String, String[]> params = new HashMap<>();
+    private HttpServletRequest request;
+    private byte[] requestBody;
+
 
     public CustomRequestParamWrapper(HttpServletRequest request) {
         super(request);
+        this.request = request;
         this.params.putAll(request.getParameterMap());
     }
 
     public CustomRequestParamWrapper(HttpServletRequest request, Map<String, String[]> extraMap) {
         this(request);
+        this.request = request;
         addAllParam(extraMap);
+        addRequestBody();
+    }
+
+    private void addRequestBody() {
+        try {
+            if (this.request.getInputStream() != null) {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                IOUtils.copy(request.getInputStream(), baos);
+                this.requestBody = baos.toByteArray();
+            }
+        } catch (IOException e) {
+            //
+        }
+    }
+
+    @Override
+    public ServletInputStream getInputStream() throws IOException {
+//        if (this.requestBody == null) {
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            IOUtils.copy(request.getInputStream(), baos);
+//            this.requestBody = baos.toByteArray();
+//        }
+        ByteArrayInputStream bais = new ByteArrayInputStream(this.requestBody);
+        return new ServletInputStream() {
+            @Override
+            public boolean isFinished() {
+                return false;
+            }
+
+            @Override
+            public boolean isReady() {
+                return false;
+            }
+
+            @Override
+            public void setReadListener(ReadListener readListener) {
+
+            }
+
+            @Override
+            public int read() throws IOException {
+                return bais.read();
+            }
+        };
+    }
+
+    @Override
+    public BufferedReader getReader() throws IOException {
+        return new BufferedReader(new InputStreamReader(this.getInputStream()));
     }
 
     @Override

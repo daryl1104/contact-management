@@ -2,11 +2,36 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import {BrowserRouter, Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom';
+import Login from './container/Login';
+import Register from './container/Register';
+import Index from './container/Index';
+import Detail from './container/Detail';
+import AuthLayout from './container/AuthLayout';
+import Homepage, { listLoader, action as listAction } from './container/Homepage';
+import NewContact from './container/NewContact';
+import { action as addAction } from './container/NewContact';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
+
+const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route element={<AuthLayout />} >
+        <Route index path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />}></Route>
+
+        <Route path="/contact" element={<Homepage />} loader={listLoader} action={listAction}>
+          <Route index path="/contact/index" element={<Index />} />
+          <Route path="/contact/add" element={<NewContact />} action={addAction}/>
+          <Route path="/contact/detail/:contactId" element={<Detail />} />
+        </Route>
+        </Route>
+
+    )
+);
+root.render(<React.StrictMode>
+  <RouterProvider router={router} />
   </React.StrictMode>
 );
 
