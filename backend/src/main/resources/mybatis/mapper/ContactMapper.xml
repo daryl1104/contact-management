@@ -54,7 +54,7 @@
     </delete>
 
     <update id="update" keyProperty="id" useGeneratedKeys="true">
-        update contact set (
+        update contact set
         name = #{name},
         phone_number = #{phoneNumber},
         <if test="wechat != null">wechat = #{wechat},</if>
@@ -63,7 +63,7 @@
         <if test="address != null">address = #{address},</if>
         gender = #{gender},
         user_id = #{userId}
-        ) where id = #{id}
+         where id = #{id}
     </update>
 </mapper>
 
