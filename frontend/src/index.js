@@ -10,7 +10,8 @@ import Detail from './container/Detail';
 import AuthLayout from './container/AuthLayout';
 import Homepage, { listLoader, action as listAction } from './container/Homepage';
 import NewContact from './container/NewContact';
-import { action as addAction } from './container/NewContact';
+import { action as addAction, loader as addLoader } from './container/NewContact';
+import {loader as detailLoader, action as detailAction} from './container/Detail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -23,8 +24,8 @@ const router = createBrowserRouter(
 
         <Route path="/contact" element={<Homepage />} loader={listLoader} action={listAction}>
           <Route index path="/contact/index" element={<Index />} />
-          <Route path="/contact/add" element={<NewContact />} action={addAction}/>
-          <Route path="/contact/detail/:contactId" element={<Detail />} />
+          <Route path="/contact/add/:contactId?" element={<NewContact />} action={addAction} loader={addLoader}/>
+          <Route path="/contact/detail/:contactId" element={<Detail />} loader={detailLoader} action={detailAction}/>
         </Route>
         </Route>
 
