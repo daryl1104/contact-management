@@ -3,25 +3,6 @@ import Register from "./Register";
 import { useRef, useState } from "react";
 import { useAuth } from "./useAuth";
 
-// async function loginUser(credential,setCorrect) {
-//     return fetch("http://localhost:8800/user/login" + new URLSearchParams({
-//         username: credential.username,
-//         password: credential.password
-//     }), {
-//         method: "GET",
-//         headers: {
-//             "Content-Type": "application/json"
-//         }
-//     }).then(response => {
-//         if (!response.ok) {
-//             setCorrect(false);
-//             throw new Error("returned " + response.status);
-//         }
-//         return response.json()
-//     }).catch(error => {
-//         console.error(error);
-//     });
-// }
 export default function Login({saveToken, saveCurrent}) {
     const {login} = useAuth();
     const usernameRef = useRef();
@@ -31,21 +12,8 @@ export default function Login({saveToken, saveCurrent}) {
     const [password, setPassword] = useState(null);
     const [correct, setCorrect] = useState(true);
     const navigate = useNavigate();
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-        
-    //     console.log("1");
-    //     const response = await loginUser({
-    //         "username" : username,
-    //         "password" : password
-    //     }, setCorrect)
-    //     saveToken(response.id);
-    //     saveCurrent(username);
-    // };
     
     const handleRegister = () => {
-        console.log("2");
         navigate("/register");
     };
     

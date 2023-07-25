@@ -12,11 +12,12 @@ export const useLocalStorage = (key, initValue) => {
         }} catch (err) {
             return initValue;
         }
-    });  
+    });
 
     const setValue = (newValue) => {
         try {
             window.localStorage.setItem(key, JSON.stringify(newValue));
+            setStored(newValue);
         } catch (err) {
             setStored(newValue);
         }

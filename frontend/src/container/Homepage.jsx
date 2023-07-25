@@ -4,10 +4,7 @@ import { useLocalStorage } from "./useLocalStorage";
 import axios from "axios";
 
 export async function action({ request }) {
-    return redirect("/contact/add");
-    // const data = Object.fromEntries(request.formData());
-    // console.log(data);
-    // return redirect("/contact/list/add");    
+    return redirect("/contact/add"); 
 }
 
 export async function listLoader({ request }) {

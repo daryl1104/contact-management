@@ -12,6 +12,7 @@ import Homepage, { listLoader, action as listAction } from './container/Homepage
 import NewContact from './container/NewContact';
 import { action as addAction, loader as addLoader } from './container/NewContact';
 import {loader as detailLoader, action as detailAction} from './container/Detail';
+import { action as registerAction} from './container/Register';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -20,7 +21,7 @@ const router = createBrowserRouter(
       <Route element={<AuthLayout />} >
         <Route index path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />}></Route>
+        <Route path="/register" element={<Register />} action={registerAction}></Route>
 
         <Route path="/contact" element={<Homepage />} loader={listLoader} action={listAction}>
           <Route index path="/contact/index" element={<Index />} />

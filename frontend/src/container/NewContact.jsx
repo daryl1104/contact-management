@@ -102,9 +102,9 @@ export default function NewContact() {
                 <div className="pt-5">
                     <label className="w-20 inline-block">性别:</label>
                     <label className="w-6 inline-block ml-4">男:</label>
-                    <input className="mr-2" type="radio" value="0" name="gender" defaultChecked={detailData.gender=="0"}/>
+                    <input className="mr-2" type="radio" value="0" name="gender" defaultChecked={detailData? detailData.gender=="0" : false}/>
                     <label className="w-6 inline-block">女:</label>
-                    <input type="radio" value="1" name="gender" defaultChecked={detailData.gender == "1"}/>
+                    <input type="radio" value="1" name="gender" defaultChecked={detailData? detailData.gender == "1" : false}/>
                 </div>
                 <div className="pt-5">
                     <label className="w-20 inline-block">email:</label>
