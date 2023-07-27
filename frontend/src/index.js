@@ -25,6 +25,7 @@ const router = createBrowserRouter(
 
         <Route path="/contact" element={<Homepage />} loader={listLoader} action={listAction}>
           <Route index path="/contact/index" element={<Index />} />
+          <Route path = "" element={<Index />} />
           <Route path="/contact/add/:contactId?" element={<NewContact />} action={addAction} loader={addLoader}/>
           <Route path="/contact/detail/:contactId" element={<Detail />} loader={detailLoader} action={detailAction}/>
         </Route>

@@ -4,12 +4,17 @@ import { useLocalStorage } from "./useLocalStorage";
 import axios from "axios";
 
 export async function action({ request }) {
+    console.log("jump");
     return redirect("/contact/add"); 
 }
 
 export async function listLoader({ request }) {
     const user = window.localStorage.getItem("user")
-    // axios
+
+    // q
+    const url = new URL(request.url);
+    const q = url.searchParams.get("q");
+    console.log(q);
 
     const resData = await axios("http://localhost:8800/contact/lists",{
         method: "GET",
@@ -17,13 +22,27 @@ export async function listLoader({ request }) {
             'Content-Type': 'application/json',
         },
         withCredentials: true,
-
+        params: {
+            offset: 0,
+            limit: 50,
+        }
     })
     .then((response) => {
         return response.data; 
     }).catch((error) => {
         return null;
     });
+
+    if (resData && q) {
+        const newResData = resData.filter((contact) => {
+            if (contact.name.includes(q)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        return newResData;
+    }
     return resData;
 }
 export default function Homepage() {
@@ -42,9 +61,9 @@ export default function Homepage() {
             {/* // 侧边栏，展示联系人列表 */}
             <div className="flex flex-col w-[22rem] bg-[#f7f7f7] border-r border-[#e3e3e3] h-full">
                 <div className="flex flex-row justify-center items-start mx-auto h-10 mt-4">
-                    <form className="h-full basis-1/3" action="" method="">
-                        <input className="h-full" type="text" placeholder="搜索"></input>
-                    </form>
+                    <Form className="h-full basis-1/3" method="get">
+                        <input className="h-full" type="search" placeholder="搜索" name="q"></input>
+                    </Form>
                     <Form className="h-full basis-2/3 ml-4" method="POST">
                         <input className="h-full px-2 cursor-pointer" type="submit" value="新增"></input>
                     </Form>
