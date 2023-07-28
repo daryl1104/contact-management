@@ -1,9 +1,10 @@
-import { redirect, useNavigate } from "react-router-dom";
-import Register from "./Register";
+import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
-import { useAuth } from "./useAuth";
+import { useAuth } from "../hook/useAuth";
+import { useLocalStorage } from "../hook/useLocalStorage";
 
 export default function Login({saveToken, saveCurrent}) {
+    const [user, setUser] = useLocalStorage("user", null);
     const {login} = useAuth();
     const usernameRef = useRef();
     const passwordRef = useRef();
@@ -16,15 +17,33 @@ export default function Login({saveToken, saveCurrent}) {
     const handleRegister = () => {
         navigate("/register");
     };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = {username: usernameRef.current.value, password: passwordRef.current.value};
+        
+        const responseData = await login(data).then((response) => {
+            return response;
+        });
+        
+        if (responseData.code == 200) {
+            // success
+            setCorrect(true);
+            const rawData = responseData.data;
+            data.id = rawData.id;
+            
+            setUser(data);
+            navigate("/contact/index");
+        } else {
+            // error
+            setCorrect(false);
+            navigate("/login");
+        }
+    };
     
     return (
         <div className="h-screen flex flex-col justify-center items-center flex-wrap">
-            <form className="border-2" onSubmit={(e)=>{
-                e.preventDefault();
-                // console.log(usernameRef.current.value);
-                const data = {username: usernameRef.current.value, password: passwordRef.current.value, correct: setCorrect};
-                login(data);
-                }}>
+            <form className="border-2" onSubmit={handleSubmit}>
                 <div className="mx-4 my-2 border-b-2 text-center text-3xl">登录</div>
                 <div className="mx-2">
                     <label className="block">用户名：</label>

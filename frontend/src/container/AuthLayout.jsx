@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { AuthProvider } from "./useAuth";
+import { AuthProvider } from "../hook/useAuth";
 
 export default function AuthLayout() {
     return (

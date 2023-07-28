@@ -4,9 +4,7 @@ import { Form, redirect, useActionData } from "react-router-dom";
 export async function action ({ request, params}) {
     const errors = {};
     const data = await request.formData();
-    // const formData = Object.fromEntries(await request.formData());
 
-    // const jData = JSON.stringify(data);
     const username = data.get("username");
     const password = data.get("password");
     
@@ -18,12 +16,9 @@ export async function action ({ request, params}) {
 
         }
     }).then((response) => {
-        console.log(request);
         return response.data;
     }).catch((error) => {
         errors.msg = "注册失败，请重试";
-        console.error(error);
-
     });
 
     if (Object.keys(errors).length) {

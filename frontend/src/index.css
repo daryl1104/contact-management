@@ -46,3 +46,8 @@ form input {
 form input[type=text] {
   text-indent: 1rem;
 }
+
+.required::after {
+  content: "*";
+  color: red;
+}

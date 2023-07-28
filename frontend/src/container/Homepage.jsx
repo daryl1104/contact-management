@@ -1,10 +1,8 @@
-import { Form, Link, Navigate, Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
-import { useAuth } from "./useAuth";
-import { useLocalStorage } from "./useLocalStorage";
-import axios from "axios";
+import { Form, Link, Navigate, Outlet, redirect, useLoaderData } from "react-router-dom";
+import { useAuth } from "../hook/useAuth";
+import { contactList } from "../util/httpTemplate";
 
 export async function action({ request }) {
-    console.log("jump");
     return redirect("/contact/add"); 
 }
 
@@ -14,36 +12,27 @@ export async function listLoader({ request }) {
     // q
     const url = new URL(request.url);
     const q = url.searchParams.get("q");
-    console.log(q);
 
-    const resData = await axios("http://localhost:8800/contact/lists",{
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-        params: {
-            offset: 0,
-            limit: 50,
-        }
-    })
-    .then((response) => {
-        return response.data; 
-    }).catch((error) => {
-        return null;
-    });
-
-    if (resData && q) {
-        const newResData = resData.filter((contact) => {
-            if (contact.name.includes(q)) {
-                return true;
-            } else {
+    const resData = await contactList();
+    console.log(resData);
+    if (resData.code == 200) {
+        // success
+        const rawData = resData.data;
+        // handle q
+        if (rawData && q) {
+            return rawData.filter((contact) => {
+                if (contact.name.includes(q)) {
+                    return true;
+                }
                 return false;
-            }
-        });
-        return newResData;
+            })
+        }
+        return rawData;
+        
+    } else {
+        // error. no data.
+        return null;
     }
-    return resData;
 }
 export default function Homepage() {
     const {user,logout} = useAuth();
@@ -80,7 +69,6 @@ export default function Homepage() {
                                             <div className="flex-1">{contact.name}</div>
                                             <div className="flex-1">{contact.phone_number}</div>
                                             </Link>
-                                            {/* {contact.name}{" "}{contact.phone_number} */}
                                             </li>)
                                     })
                                 }

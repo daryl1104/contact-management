@@ -1,52 +1,29 @@
 import axios from "axios";
-import { redirect, useLoaderData } from "react-router-dom";
-import { Form } from "react-router-dom";
+import { Form, redirect, useLoaderData } from "react-router-dom";
+import { contactGet, contactDelete } from "../util/httpTemplate";
 
 export async function action({ request,params }) {
     const formData = await request.formData();
     const operate = formData.get("operate");
     console.log(operate);
     if (operate === "edit") {
-        console.log("edit");
         return redirect(`/contact/add/${params.contactId}`);
     }
     if (operate === "delete") {
-        console.log("delete");
-        const resData = await axios.get("http://localhost:8800/contact/delete",
-        {
-            params: {
-                contactId: params.contactId,
-            },
-            withCredentials: true,
-        }).then((response) => {
-            console.log(response);
-            return response;
-        }).catch((error) => {
-            console.error(error);
-
-        });
+        await contactDelete(params);
     }
 
     return redirect("/contact/index");
 }
 export async function loader({ request,params }) {
-
-    const resData = await axios.get("http://localhost:8800/contact/get",
-        {
-            params: {
-                contact_id: params.contactId
-            },
-            withCredentials: true,
-        }
-    ).then((response) => {
-        console.log(response);
-        return response.data;
-    }).catch((error) => {
-        console.error(error);
-        return error;
-    }) ;
-    return resData ? resData : "";
+    const resData = await contactGet(params);
+    if (resData.code == 200) {
+        return resData.data;
+    } else {
+        return "";
+    }
 }
+
 export default function Detail() {
     const detailData = useLoaderData();
 
