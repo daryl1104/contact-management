@@ -6,95 +6,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="/css/index.css" rel="stylesheet" />
+    <script src="../javascript/index.js"></script>
 </head>
 
 <body>
     <!-- head -->
-    <div class="div-row-flex right header" style="width: 100%; height: 30px;">
+    <div class="div-row-flex right" style="width: 100%; height: 30px; padding-left: 2rem;">
         <span>欢迎，<span>邓长英</span></span>
         <button class="button">退出</button>
     </div>
-    <!-- sidebar -->
-    <div class="div-row-flex">
+    <div class="div-row-flex" style="border-bottom: solid 2px rgb(202, 198, 198); margin-left: 2rem;">
         <h1 class="h1">通讯录管理系统</h1>
     </div>
-    <div class="search">
-        <form>
-            <input type="text" name="search" placeholder="search" />
-            <!-- <a href="https://www.baidu.com">
-                <button type="button">添加</button>
-            </a> -->
-            <button onclick="window.open('http://www.baidu.com')">添加</button>
-        </form>
-
-        <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-            <li>7</li>
-        </ul>
-
-        <div class="length">
-            <form id="add-form" class="contant-flex">
-                <h1>添加联系人</h1>
-                <div>
-                    <label for="area">国家码：</label>
-                    <select style="padding: 12px 12px; margin: 0.5rem;">
-                        <option value="+86">中国</option>
-                        <option value="+853">中国香港</option>
-                        <option value="+852">中国澳门</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="phone">手机号：</label>
-                    <input type="text" placeholder="请输入手机号" required />
-                </div>
-
-                <div>
-                    <label>姓名/昵称：</label>
-                    <input type="text" name="name" placeholder="请输入姓名" />
-                </div>
-                <div>
-                    <label>头像：</label>
-                    <input type="text" name="avatar" placeholder="请输入头像url" />
-                </div>
-
-                <div>
-                    <label>性别：</label>
-                    <span style="padding: 12px 12px; margin: 0.5rem;">男</span><input type="radio" name="gender"
-                        value="男" />
-                    <span style="padding: 12px 12px; margin: 0.5rem;">女</span><input type="radio" name="gender"
-                        value="女" />
-                </div>
-
-                <div>
-                    <label>地址：</label>
-                    <input type="text" name="address" placeholder="请输入联系人地址" />
-                </div>
-
-                <div>
-                    <label>微信号：</label>
-                    <input type="text" name="wechat" placeholder="请输入微信号" />
-                </div>
-                <div>
-                    <label>邮箱：</label>
-                    <input type="text" name="email" placeholder="请输入邮箱" />
-                </div>
-
-
-                <button type="button" onclick="提交成功">提交</button>
+    <div style="display: flex; height: 80%;">
+        <!-- sidebar -->
+        <div style="flex-basis: 30%; margin-left: 2rem; border-right: solid 2px rgb(202, 198, 198);">
+            <form class="search" style="padding-top:0.5rem; padding-bottom: 0.5rem; border-bottom: solid 2px rgb(202, 198, 198); height: 40px; width: 100%; text-align: center; vertical-align: middle;">
+                <input type="text" name="search" placeholder="search" style="height: 100%; width: 60%;;"/>
+                <button onclick="handleAddButton(event)" style="height: 100%; width: 20%;">添加</button>
             </form>
+            
+            <div style="padding-top: 0.5rem">
+                <ul style="list-style-type: none;">
+                    <li style="">啊<span style="float: right; margin-right: 3rem;">123456678900</span></li>
+                    <li style="">佳<span style="float: right; margin-right: 3rem;">123456678900</span></li>
+                    <li style="">啊来得<span style="float: right; margin-right: 3rem;">123456678900</span></li>
+                    <li style="">忘记<span style="float: right; margin-right: 3rem;">123456678900</span></li>
+                    <li style="">我发上<span style="float: right; margin-right: 3rem;">123456678900</span></li>
+                    <li style="">水电费<span style="float: right;margin-right: 3rem; ">123456678900</span></li>
+                    <li style="">地方<span style="float: right;margin-right: 3rem;">123456678900</span></li>
+                    <li style="">啊<span style="float: right;margin-right: 3rem;">123456678900</span></li>
+
+                    <!-- <li style=""><span>你即可</span><span>1111111111</span></li> -->
+                   
+                </ul>
+            </div>
+            
         </div>
 
+        <!-- detail -->
+        <div style="flex-basis: 60%;">
+                <div id="add-form-p" class="length" style="display: none; height: 100%; width: 100%; padding-left: 2rem;">
+                    <form id="add-form" class="contant-flex">
+                        <h1>添加联系人</h1>
+                        <div>
+                            <label for="area">国家码：</label>
+                            <select style="padding: 12px 12px; margin: 0.5rem;">
+                                <option value="+86">中国</option>
+                                <option value="+853">中国香港</option>
+                                <option value="+852">中国澳门</option>
+                            </select>
+                        </div>
+        
+                        <div>
+                            <label for="phone">手机号：</label>
+                            <input type="text" placeholder="请输入手机号" required />
+                        </div>
+        
+                        <div>
+                            <label>姓名/昵称：</label>
+                            <input type="text" name="name" placeholder="请输入姓名" />
+                        </div>
+                        <div>
+                            <label>头像：</label>
+                            <input type="text" name="avatar" placeholder="请输入头像url" />
+                        </div>
+        
+                        <div>
+                            <label>性别：</label>
+                            <span style="padding: 12px 12px; margin: 0.5rem;">男</span><input type="radio" name="gender"
+                                value="男" />
+                            <span style="padding: 12px 12px; margin: 0.5rem;">女</span><input type="radio" name="gender"
+                                value="女" />
+                        </div>
+        
+                        <div>
+                            <label>地址：</label>
+                            <input type="text" name="address" placeholder="请输入联系人地址" />
+                        </div>
+        
+                        <div>
+                            <label>微信号：</label>
+                            <input type="text" name="wechat" placeholder="请输入微信号" />
+                        </div>
+                        <div>
+                            <label>邮箱：</label>
+                            <input type="text" name="email" placeholder="请输入邮箱" />
+                        </div>
+        
+        
+                        <button type="button" onclick="提交成功">提交</button>
+                    </form>
+                </div>
+        
+        </div>
     </div>
-    <!-- detail -->
-    <div>
 
-    </div>
 </body>
 
 </html>
