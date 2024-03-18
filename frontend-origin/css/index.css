@@ -4,62 +4,18 @@
     box-sizing: border-box;
 }
 
-html {
-    height: 100%;
-    width: 100%;
-}
-
+html,
 body {
     height: 100%;
     width: 100%;
 }
 
-#content-body {
-    font-size: 1.5rem;
-}
-
-.header {
-    /* border: solid 0.5px black; */
-    border-bottom: solid 0.5px black;
-    /* margin-top: 1rem; */
-
-}
-
-.borderradiu {
-    border-radius: 0.5rem;
-    font-size: 10px;
-}
-
-.button {
-    width: 50px;
-    text-decoration: none;
-    border: solid 0.5px black;
-    background-color: white;
-    border-radius: 2rem;
-    margin-left: 0.5rem;
-}
-
-#add-form button {
-    width: 20%;
-    cursor: pointer;
-}
-
-#add-form button:active {
-    background-color: #00ffee;
-}
-
-.button:hover {
-    cursor: pointer;
-    text-decoration: underline;
+.button-label {
+    padding: 0;
+    text-align: center;
 }
 
 .div-row-flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.div-col-flex {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,72 +28,104 @@ body {
     /* float: right; */
 }
 
-.sidebar {
-    width: 22rem;
-    height: 100%;
-    left: 0px;
+.button {
+    width: 50px;
+    text-decoration: none;
+    border: solid 0.5px black;
+    background-color: white;
+    border-radius: 2rem;
+    margin-left: 0.5rem;
 }
 
 h1 {
     text-align: center;
     width: 100%;
+    font-size: 30px;
 }
 
-.contant-flex {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+ul {
+    list-style-type: none;
+}
+
+
+#content-body {
+    font-size: 1.5rem;
+}
+
+.sidebar {
+    flex-basis: 30%;
+    margin-left: 2rem;
+    border-right: solid 2px rgb(202, 198, 198);
 }
 
 .search {
-    width: 100%;
-    box-sizing: 50%;
-    /* border: 2px solid #ccc; */
-    /* border-radius: 4px; */
     font-size: 4px;
-    background-image: url('searchicon.png');
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+    border-bottom: solid 2px rgb(202, 198, 198);
+    height: 40px;
+    width: 100%;
+    vertical-align: middle;
+    /* width: 100%;
+    box-sizing: 50%;
+    font-size: 4px;
+    background-image: url('searchicon.png'); */
 }
 
-#add-form input {
-    height: 2rem;
-    margin: 0.5rem;
-    box-sizing: border-box;
-    padding: 12px 12px;
-    resize: vertical;
+.radius {
+    border-radius: 10px;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.add-button {
+    height: 30px;
+    width: 80px;
+}
+
+.group {
+    cursor: pointer;
+    background: url(../img/menuArr2.png) 6px center no-repeat;
+    padding-left: 30px;
+}
+
+.click-detail {
+    float: right;
+    margin-right: 3rem;
+    color: blue;
+    border-bottom: blue 1px solid;
+    cursor: pointer;
+    display: none;
+}
+
+.list-member {
+    padding-left: 30px;
+}
+
+.list-member:hover .click-detail {
+    display: block;
+}
+
+
+/* add form */
+table {
+    width: 100%;
+}
+
+input {
+    font-size: 1.5rem;
+}
+
+.table-cell-width-20 {
+    width: 20%;
+}
+
+.table-cell-width-70 {
     width: 70%;
 }
 
-label {
-    padding: 12px 12px 12px 0;
-    display: inline-block;
-    width: 20%;
-}
-
-#add-form input[type=radio] {
-    vertical-align: middle;
-    /* height: 100%; */
-    width: auto;
-    margin: 0px;
-
-}
-
-.length {
-    width: 80%;
-    height: 80%;
-}
-
-.col-25 {
-    width: 20%;
-    /* float: left; */
-}
-
-.col-75 {
-    width: 60%;
-    /* float: left; */
-}
-
-#add-form>* {
-    width: 100%;
-    font-size: 1rem;
+tr {
+    height: 50px;
 }

@@ -3,8 +3,23 @@ function handleAddButton(e) {
     e.preventDefault();
     const ele = document.getElementById("add-form-p");
     ele.style.display = "block";
+
     const detailEle = document.getElementById("contact-detail");
     detailEle.style.display = "none";
+    let groupEle = document.getElementById("add-group-form");
+    groupEle.style.display = "none";
+}
+
+function handleAddGroupButton(e) {
+    e.preventDefault();
+    let ele = document.getElementById("add-group-form");
+    ele.style.display = "block";
+
+    const detailEle = document.getElementById("contact-detail");
+    detailEle.style.display = "none";
+    let addEle = document.getElementById("add-form-p");
+    addEle.style.display = "none";
+
 }
 
 function handleEditButton(e) {
@@ -35,4 +50,21 @@ function handleEditButton(e) {
 
 
 
+}
+
+// 导入功能
+function importFile(event) {
+    // 打开file explorer
+
+}
+// 导出功能
+function exportFile(event) {
+    // 发送一个网络请求，后端生成csv文件，download
+    console.log("!");
+
+}
+
+function exit(event) {
+    // 退出登录
+    console.log("exit!");
 }

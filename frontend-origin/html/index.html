@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>通讯录管理系统</title>
     <link href="/css/index.css" rel="stylesheet" />
     <script src="../javascript/index.js"></script>
 </head>
@@ -14,31 +14,61 @@
     <div class="div-row-flex right"
         style="background-color: darkolivegreen;;width: 100%; height: 20px; padding-left: 2rem;">
         <span>欢迎，<span>邓长英</span></span>
-        <button class="button">退出</button>
+
+        <label class="button button-label">
+            <input type="file" style="display: none;">导入
+        </label>
+
+        <label class="button button-label" onclick="exportFile(event)">
+            导出
+        </label>
+        <label class="button button-label" onclick="exit(event)">
+            退出
+        </label>
     </div>
     <div class="div-row-flex"
         style="background-color: darkseagreen;;border-bottom: solid 2px rgb(202, 198, 198); margin-left: 2rem;">
         <h1 class="h1">通讯录管理系统</h1>
     </div>
+
+
+
+
     <div id="content-body" style="display: flex; height: 80%;">
         <!-- sidebar -->
-        <div style="flex-basis: 30%; margin-left: 2rem; border-right: solid 2px rgb(202, 198, 198);">
-            <form class="search"
-                style="padding-top:0.5rem; padding-bottom: 0.5rem; border-bottom: solid 2px rgb(202, 198, 198); height: 40px; width: 100%; text-align: center; vertical-align: middle;">
-                <input type="search" name="search" placeholder="search" style="height: 100%; width: 60%;;" />
-                <button onclick="handleAddButton(event)" style="height: 100%; width: 20%;">添加</button>
+        <div class="sidebar">
+            <form class="search">
+                <input class="radius full-height" type="search" name="search" placeholder="search"
+                    style="width: 60%;" />
+                <button class="radius full-height" onclick="" style="width: 20%;">搜索</button>
             </form>
+            <button class="add-button" onclick="handleAddButton(event)">添加联系人</button>
+            <button class="add-button" onclick="handleAddGroupButton(event)">添加分组</button>
 
             <div style="padding-top: 0.5rem">
-                <ul style="list-style-type: none;">
-                    <li style="">啊<span style="float: right; margin-right: 3rem;">123456678900</span></li>
-                    <li style="">佳<span style="float: right; margin-right: 3rem;">123456678901</span></li>
-                    <li style="">啊来得<span style="float: right; margin-right: 3rem;">123456678902</span></li>
-                    <li style="">忘记<span style="float: right; margin-right: 3rem;">123456678903</span></li>
-                    <li style="">我发上<span style="float: right; margin-right: 3rem;">123456678904</span></li>
-                    <li style="">水电费<span style="float: right;margin-right: 3rem; ">123456678905</span></li>
-                    <li style="">地方<span style="float: right;margin-right: 3rem;">123456678906</span></li>
-                    <li style="">啊<span style="float: right;margin-right: 3rem;">123456678907</span></li>
+                <div class="">
+                    <span class="group">亲戚组</span>
+                    <ul>
+                        <li class="list-member">asd<span class="click-detail">详情</span></li>
+                        <li class="list-member">vdsvs<span class="click-detail">详情</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="group">同事组</span>
+                    <ul class="group-click">
+                        <li class="list-member">sdf<span class="click-detail">详情</span></li>
+                        <li class="list-member">sdf<span class="click-detail">详情</span></li>
+                    </ul>
+                </div>
+                <ul class="lists">
+                    <li class="list-member">啊<span class="click-detail">详情</span></li>
+                    <li class="list-member">佳<span class="click-detail">详情</span></li>
+                    <li class="list-member">啊来得<span class="click-detail">详情</span></li>
+                    <li class="list-member">忘记<span class="click-detail">详情</span></li>
+                    <li class="list-member">我发上<span class="click-detail">详情</span></li>
+                    <li class="list-member">水电费<span class="click-detail">详情</span></li>
+                    <li class="list-member">地方<span class="click-detail">详情</span></li>
+                    <li class="list-member">啊<span class="click-detail">详情</span></li>
 
                     <!-- <li style=""><span>你即可</span><span>1111111111</span></li> -->
 
@@ -77,11 +107,14 @@
                 <div style="width: 8rem;display: inline-block;">邮箱</div>
                 <div style="display: inline-block;">45968956895976@qq.com</div>
             </div>
+
             <div style="padding-bottom: 10px;">
-                <button onclick="handleEditButton(event)"
-                    style="height: 40px; width: 60px; border-radius: 4px;background-color: darkseagreen;border: solid 1px rgb(202, 198, 198);">修改</button>
-                <button
-                    style="height: 40px; width: 60px; border-radius: 4px; margin-left: 2rem;border: solid 1px rgb(202, 198, 198);">删除</button>
+                <div style="width: 8rem;display: inline-block;">群组</div>
+                <div style="display: inline-block;">XXXX</div>
+            </div>
+            <div style="padding-bottom: 10px;">
+                <button class="add-button" onclick="handleEditButton(event)">修改</button>
+                <button class="add-button">删除</button>
             </div>
         </div>
 
@@ -90,59 +123,81 @@
         <!-- add -->
         <div id="add-form-p" style="flex-basis: 60%;display: none;">
             <div class="length" style="height: 100%; width: 100%; padding-left: 2rem;">
-                <form id="add-form" class="contant-flex ">
+                <form id="add-form" class=" ">
                     <h1>添加联系人</h1>
-                    <div>
-                        <label for="area">国家码：</label>
-                        <select style="padding: 12px 12px; margin: 0.5rem;" class="borderradiu">
-                            <option value="+86">中国</option>
-                            <option value="+853">中国香港</option>
-                            <option value="+852">中国澳门</option>
-                        </select>
-                    </div>
+                    <table>
+                        <tr>
+                            <td class="table-cell-width-20"><label for="phone">手机号：</label></td>
+                            <td><input type="text" placeholder="请输入手机号" class="" required />
+                            </td>
 
-                    <div>
-                        <label for="phone">手机号：</label>
-                        <input type="text" placeholder="请输入手机号" class="borderradiu" required />
-                    </div>
+                        </tr>
 
-                    <div>
-                        <label>姓名/昵称：</label>
-                        <input type="text" name="name" placeholder="请输入姓名" class="borderradiu" />
-                    </div>
-                    <div>
-                        <label>头像：</label>
-                        <input type="file" name="avatar" placeholder="请输入头像url" />
-                    </div>
-
-                    <div>
-                        <label>性别：</label>
-                        <span style="padding: 12px 12px; margin: 0.5rem;">男</span><input type="radio" name="gender"
-                            value="男" />
-                        <span style="padding: 12px 12px; margin: 0.5rem;">女</span><input type="radio" name="gender"
-                            value="女" />
-                    </div>
-
-                    <div>
-                        <label>地址：</label>
-                        <input type="text" name="address" placeholder="请输入联系人地址" class="borderradiu" />
-                    </div>
-
-                    <div>
-                        <label>微信号：</label>
-                        <input type="text" name="wechat" placeholder="请输入微信号" class="borderradiu" />
-                    </div>
-                    <div>
-                        <label>邮箱：</label>
-                        <input type="email" name="email" placeholder="请输入邮箱" class="borderradiu" />
-                    </div>
+                        <tr>
+                            <td><label>姓名/昵称：</label></td>
+                            <td><input type="text" name="name" placeholder="请输入姓名" class="" /></td>
+                        </tr>
 
 
-                    <button type="button" onclick="提交成功" class="borderradiu"
-                        style="width: 50px; height: 30px;">提交</button>
+
+
+
+                        <tr>
+                            <td><label>头像：</label></td>
+                            <td><input type="file" name="avatar" placeholder="请输入头像url" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>性别：</label></td>
+                            <td><span style="padding: 12px 12px; margin: 0.5rem;">男</span><input type="radio"
+                                    name="gender" value="男" />
+                                <span style="padding: 12px 12px; margin: 0.5rem;">女</span><input type="radio"
+                                    name="gender" value="女" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>地址：</label></td>
+                            <td><input type="text" name="address" placeholder="请输入联系人地址" class="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>微信号：</label></td>
+                            <td> <input type="text" name="wechat" placeholder="请输入微信号" class="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>邮箱：</label></td>
+                            <td> <input type="email" name="email" placeholder="请输入邮箱" class="" />
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td><label>分组：</label></td>
+                            <td> <select name="group">
+                                    <option value="1">同事组</option>
+                                    <option value="2">亲戚组</option>
+                                    <option value="3">好友组</option>
+                                </select> </td>
+                        </tr>
+
+                        <tr>
+                            <td><button class="add-button" type="button" onclick="提交成功">提交</button>
+                            </td>
+                            <td> <button class="add-button" onclick="fanhui">返回</button> </td>
+                        </tr>
+                    </table>
                 </form>
             </div>
+        </div>
 
+        <!-- add group -->
+        <div id="add-group-form" style="flex-basis: 60%; display: none;">
+            <form>
+                <lable>组名称</lable>
+                <input type="text" name="groupname" placeholder="请输入群名称">
+                <button class="add-button" type="button" onclick="提交">提交</button>
+            </form>
         </div>
     </div>
 
