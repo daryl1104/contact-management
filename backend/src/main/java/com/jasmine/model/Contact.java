@@ -2,12 +2,14 @@ package com.jasmine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * @author 邓长英
  * @version 1.0
  * @date 2023/7/17 3:35 PM
  */
-public class Contact {
+public class Contact implements Serializable {
     private Integer id;
     private String name;
     @JsonProperty("phone_number")

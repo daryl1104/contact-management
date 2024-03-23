@@ -83,6 +83,7 @@ ul {
 .add-button {
     height: 30px;
     width: 80px;
+    
 }
 
 .group {
@@ -109,12 +110,20 @@ ul {
 }
 
 
-/* add form */
+/* add form table */
 table {
     width: 100%;
 }
 
 input {
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+button {
+    vertical-align: middle;
+}
+
+select {
     font-size: 1.5rem;
 }
 

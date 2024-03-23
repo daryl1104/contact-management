@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/login.css" rel="stylesheet" />
-    <title>Document</title>
+    <title>首页</title>
 </head>
 
 <body>
@@ -14,18 +14,23 @@
             <p>联系人管理系统</p>
         </div>
         <div class="flex-center">
-            <form>
+            <form onsubmit="event.preventDefault();">
                 <label>用户名</label>
-                <input type="text" placeholder="请输入用户名" />
+                <input name="username" type="text" placeholder="请输入用户名" />
                 <label>密码</label>
-                <input type="password" placeholder="请输入密码" />
+                <input name="password" type="password" placeholder="请输入密码" />
                 <div style="display: flex; justify-content: space-around; align-items: center;">
-                    <button type="submit">登录</button>
-                    <button type="submit">注册</button>
+                    <button name="submitType" value="login" onclick="loginRegister(this)">登录</button>
+                    <button name="submitType" value="register" onclick="loginRegister(this)">注册</button>
+                    <!-- <input type="submit" name="submitType" value="login">登录 -->
+                    <!-- <input type="submit" name="submitType" value="register">注册 -->
                 </div>
             </form>
         </div>
     </div>
+
+    <script src="/javascript/login.js" type="text/javascript"></script>
+
 </body>
 
 </html>

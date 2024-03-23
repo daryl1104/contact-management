@@ -138,10 +138,6 @@
                             <td><input type="text" name="name" placeholder="请输入姓名" class="" /></td>
                         </tr>
 
-
-
-
-
                         <tr>
                             <td><label>头像：</label></td>
                             <td><input type="file" name="avatar" placeholder="请输入头像url" />
@@ -193,11 +189,14 @@
 
         <!-- add group -->
         <div id="add-group-form" style="flex-basis: 60%; display: none;">
-            <form>
-                <lable>组名称</lable>
-                <input type="text" name="groupname" placeholder="请输入群名称">
-                <button class="add-button" type="button" onclick="提交">提交</button>
-            </form>
+            <div style="height: 100%; width: 100%; padding-left: 2rem;">
+                <form>
+                    <h1>添加分组</h1>
+                    <lable class="table-cell-width-20" style="display: inline-block;">组名称：</lable>
+                    <input type="text" name="groupname" placeholder="请输入群名称">
+                    <button class="add-button" type="button" onclick="提交">提交</button>
+                </form>
+            </div>
         </div>
     </div>
 

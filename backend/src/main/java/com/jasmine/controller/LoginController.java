@@ -1,5 +1,6 @@
 package com.jasmine.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.jasmine.exception.CodeException;
 import com.jasmine.model.OperationResult;
 import com.jasmine.model.User;
@@ -23,7 +24,9 @@ public class LoginController {
     private ILoginService loginService;
 
     @PostMapping(value = "/register")
-    public Object register(@RequestParam String username, @RequestParam String password) throws CodeException {
+    public Object register(@RequestBody JsonNode jsonNode) throws CodeException {
+        String username = jsonNode.get("username").asText();
+        String password = jsonNode.get("password").asText();
         loginService.register(username, password);
 
         return new OperationResult();

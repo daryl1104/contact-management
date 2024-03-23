@@ -1,5 +1,6 @@
+var baseUrl = "http://localhost:8800/";
 function handleAddButton(e) {
-    // 点击添加，改变表单的cs
+    // 点击添加，改变表单的css
     e.preventDefault();
     const ele = document.getElementById("add-form-p");
     ele.style.display = "block";
@@ -64,7 +65,32 @@ function exportFile(event) {
 
 }
 
+
 function exit(event) {
-    // 退出登录
+    // 退出登录. 清除localstorage
+    fetch(baseUrl + "user/logout");
+    window.location.href = "login.html";
     console.log("exit!");
+}
+
+function sendRequest(url, method, data) {
+    let username = data.username;
+    let password = data.password;
+    let requestEntity = {};
+    requestEntity.method = method;
+    requestEntity.headers = { "Content-Type": "application/json" };
+    requestEntity.body = JSON.stringify({
+        username: `${username}`,
+        password: `${password}`,
+    });
+    fetch(url, requestEntity).then(
+        response => {
+            console.log(response.status);
+            console.log(response.headers);
+            return response.json();
+        }
+    ).then(json => {
+        console.log(json);
+        // todo: 登录的话，记得id存到local storage.
+    });
 }

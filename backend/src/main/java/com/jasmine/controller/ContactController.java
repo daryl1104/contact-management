@@ -7,6 +7,13 @@ import com.jasmine.service.IContactService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 邓长英
@@ -52,5 +59,35 @@ public class ContactController {
                          @RequestBody Contact contact) {
         contactService.update(userId, contact);
         return new OperationResult();
+    }
+
+    @PostMapping("/importFile")
+    public Object importFromCsv(@RequestParam Integer userId) {
+        return new Object();
+    }
+
+    @GetMapping("/exportFile")
+    public void exportToCsv(@RequestParam Integer userId,
+                            HttpServletRequest request,
+                            HttpServletResponse response) throws CodeException {
+
+        List<Contact> lists = contactService.lists(userId, null, null);
+
+        String fileName = "test.csv";
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+
+        // header
+        String csvHeader = "姓名,地址,手机号\n";
+        String csvBody = lists.stream().map(e -> {
+            return e.getName() + "," + e.getAddress() + "," + e.getPhoneNumber();
+        }).collect(Collectors.joining("\n"));
+
+        try {
+            ServletOutputStream outputStream = response.getOutputStream();
+            outputStream.write(csvHeader.getBytes(StandardCharsets.UTF_8));
+            outputStream.write(csvBody.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
