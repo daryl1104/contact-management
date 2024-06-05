@@ -15,6 +15,7 @@
         <result column="address" property="address"/>
         <result column="gender" property="gender"/>
         <result column="user_id" property="userId"/>
+        <result column="group_id" property="groupId"/>
     </resultMap>
 
     <select id="queryByUserId" resultMap="ContactMap">
@@ -23,6 +24,10 @@
         <if test="offset != null and limit != null">LIMIT #{offset}, #{limit}</if>
     </select>
 
+    <select id="queryByName" resultMap="ContactMap">
+        select * from contact where
+        user_id = #{userId} and name like '%' || #{name} || '%'
+    </select>
     <select id="queryByUserIdAndContactId" resultMap="ContactMap">
         select * from contact where
         user_id = #{userId} and id = #{contactId}
@@ -35,6 +40,7 @@
         <if test="qq != null">qq,</if>
         <if test="email != null">email,</if>
         <if test="address != null">address,</if>
+        <if test="groupId != null">group_id,</if>
         gender,
         user_id
         )
@@ -44,6 +50,7 @@
         <if test="qq != null">#{qq},</if>
         <if test="email != null">#{email},</if>
         <if test="address != null">#{address},</if>
+        <if test="groupId != null">#{groupId},</if>
         #{gender},
         #{userId}
         )
@@ -61,6 +68,7 @@
         <if test="qq != null">qq = #{qq},</if>
         <if test="email != null">email = #{email},</if>
         <if test="address != null">address = #{address},</if>
+        <if test="groupId != null">group_id = #{groupId},</if>
         gender = #{gender},
         user_id = #{userId}
          where id = #{id}

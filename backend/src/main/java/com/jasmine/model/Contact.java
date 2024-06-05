@@ -20,12 +20,14 @@ public class Contact implements Serializable {
     private String address;
     private Integer gender;
     private Integer userId;
+    @JsonProperty("group_id")
+    private Integer groupId;
 
 
     public Contact() {
     }
 
-    public Contact(Integer id, String name, String phoneNumber, String wechat, String qq, String email, String address, Integer gender, Integer userId) {
+    public Contact(Integer id, String name, String phoneNumber, String wechat, String qq, String email, String address, Integer gender, Integer userId, Integer groupId) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -35,6 +37,7 @@ public class Contact implements Serializable {
         this.address = address;
         this.gender = gender;
         this.userId = userId;
+        this.groupId = groupId;
     }
 
     public Integer getUserId() {
@@ -107,5 +110,13 @@ public class Contact implements Serializable {
 
     public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 }

@@ -15,4 +15,6 @@ public interface IContactService {
     void delete(Integer userId, Integer contactId);
 
     void update(Integer userId, Contact contact);
+
+    List<Contact> search(Integer userId, String search);
 }

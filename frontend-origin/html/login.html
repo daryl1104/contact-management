@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/login.css" rel="stylesheet" />
     <title>首页</title>
+    <script src="../javascript/cookie.js"></script>
 </head>
 
 <body>
@@ -22,9 +23,8 @@
                 <div style="display: flex; justify-content: space-around; align-items: center;">
                     <button name="submitType" value="login" onclick="loginRegister(this)">登录</button>
                     <button name="submitType" value="register" onclick="loginRegister(this)">注册</button>
-                    <!-- <input type="submit" name="submitType" value="login">登录 -->
-                    <!-- <input type="submit" name="submitType" value="register">注册 -->
                 </div>
+                <label name="errmsg" id="errmsg" style="display: none; color:red">密码错误</label>
             </form>
         </div>
     </div>

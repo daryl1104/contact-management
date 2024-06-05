@@ -20,4 +20,6 @@ public interface ContactMapper {
     void delete(Integer userId, Integer contactId);
 
     void update(Contact contact);
+
+    List<Contact> queryByName(@Param("userId") Integer userId,@Param("name") String search);
 }

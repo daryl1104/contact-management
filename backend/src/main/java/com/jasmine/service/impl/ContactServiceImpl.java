@@ -50,4 +50,9 @@ public class ContactServiceImpl implements IContactService {
         contact.setUserId(userId);
         contactMapper.update(contact);
     }
+
+    @Override
+    public List<Contact> search(Integer userId, String search) {
+        return contactMapper.queryByName(userId, search);
+    }
 }

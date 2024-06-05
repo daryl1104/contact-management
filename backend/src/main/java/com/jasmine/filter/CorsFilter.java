@@ -43,11 +43,12 @@ public class CorsFilter implements Filter {
     }
 
     private void setCors(HttpServletRequest request, HttpServletResponse response) {
-        String allowOrigin = "*";
-        if (!StringUtils.isEmpty(request.getHeader("Origin"))) {
-            allowOrigin = request.getHeader("Origin");
-        }
-
+//        String allowOrigin = "*";
+//        if (!StringUtils.isEmpty(request.getHeader("Origin"))) {
+//            allowOrigin = request.getHeader("Origin");
+//        }
+//        String allowOrigin = "http://127.0.0.1:3000";
+        String allowOrigin = "http://localhost:3000";
         response.setHeader("Access-Control-Allow-Origin", allowOrigin);
         response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
         response.setHeader("Access-Control-Allow-Headers", "Origin,Content-Type,Accept");

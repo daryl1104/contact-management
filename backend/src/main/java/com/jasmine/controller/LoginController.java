@@ -5,12 +5,15 @@ import com.jasmine.exception.CodeException;
 import com.jasmine.model.OperationResult;
 import com.jasmine.model.User;
 import com.jasmine.service.ILoginService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.Duration;
 
 /**
  * @author 邓长英
@@ -35,24 +38,28 @@ public class LoginController {
     @GetMapping(value = "/login")
     public Object login(@RequestParam String username, @RequestParam String password, HttpServletRequest request, HttpServletResponse response) throws CodeException {
         User user = loginService.login(username, password);
-        Cookie cookie = new Cookie("user", String.valueOf(user.getId()));
-        cookie.setPath("/");
-        response.addCookie(cookie);
+//        Cookie cookie = new Cookie("user", String.valueOf(user.getId()));
+//        cookie.setPath("/");
+//        cookie.setDomain("localhost.com");
+//        cookie.setMaxAge(999999999);
+//        response.addCookie(cookie);
+        // Building cookies
+        ResponseCookie cookie = ResponseCookie.from("user", String.valueOf(user.getId())) // key & value
+                .httpOnly(false)
+                .secure(false)
+                    .domain("localhost")  // host
+                    .path("/")      // path
+                .maxAge(Duration.ofHours(1))
+                .sameSite("Lax")  // sameSite
+
+                .build()
+                ;
+
+        // Response to the client
+        response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
         return user;
     }
 
-    @GetMapping(value = "/logout")
-    public Object logout(HttpServletRequest request, HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null && cookies.length != 0) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().contains("user")) {
-                    cookie.setValue("");
-                    response.addCookie(cookie);
-                }
-            }
-        }
-        return new OperationResult();
-    }
+
 
 }
