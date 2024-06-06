@@ -40,18 +40,7 @@ function user() {
     ele.innerHTML = username;
 }
 
-// function groupList() {
-//     fetch(baseUrl + "group/list", { credentials: "include" }).then(async response => {
-//         let result = await response.json();
 
-//         if (!response.ok) {
-//             throw new Error(JSON.stringify(result));
-//         }
-//         return result;
-//     }).then(json => {
-//         localStorage.setItem("groupList", JSON.stringify(json));
-//     })
-// }
 async function contactDetailAndFill(event) {
     event.preventDefault();
     const ele = document.getElementById("add-form-p");
@@ -94,6 +83,7 @@ async function contactDetailAndFill(event) {
 
         });
 }
+
 async function contactById(event) {
     const itemId = event.currentTarget.dataset.id;
 
@@ -113,15 +103,12 @@ async function contactById(event) {
 
 function handleSearch(event) {
     event.preventDefault();
-    // const searchName = event.value;
     const ele = document.getElementById("search");
     const searchName = ele.value;
     console.log(searchName);
     fetch(baseUrl + "contact/search?" + new URLSearchParams({
         search: searchName
     }), { credentials: "include" }).then(async response => {
-        // console.log(response.status);
-        // console.log(response.headers);
         let result = await response.json();
 
         if (!response.ok) {
@@ -175,6 +162,8 @@ async function handleAddButton(e) {
             return json;
         });
 
+    // 清空原option
+    form.elements.group.innerHTML = "";
     let dummy = document.createElement("option");
     form.elements.group.add(dummy);
     for (let item of groupList) {
@@ -200,11 +189,9 @@ function handleAddGroupButton(e) {
     addEle.style.display = "none";
 }
 
-function addGroup(ele) {
-    // console.log(ele);
-    // console.log(ele.groupname.value);
-    ele.preventDefault();
-    let groupName = ele.groupname.value;
+function addGroup(event) {
+    event.preventDefault();
+    let groupName = event.target.groupname.value;
     fetch(baseUrl + "group/add?" + new URLSearchParams({ groupName }), { credentials: "include" })
         .then(async response => {
             let result = await response.json();
@@ -247,6 +234,7 @@ async function handleEditButton(e) {
     form.elements.address.value = document.getElementById("address").innerHTML;
     form.elements.wechat.value = document.getElementById("wechat").innerHTML;
     form.elements.email.value = document.getElementById("email").innerHTML;
+    form.elements.group.innerHTML = "";
     let dummy = document.createElement("option");
     form.elements.group.add(dummy);
     for (let item of groupList) {
@@ -266,14 +254,6 @@ async function handleEditButton(e) {
         }
     });
     form.elements.back.dataset.id = document.getElementById("id").innerHTML;
-
-    // // 数据回填
-    // // 从localStorage里面拿数据。（数据是每次点击左边，除了去请求http后端拿详细数据，set到localStorage里面）
-    // const currentContact = localStorage.getItem("contact");
-    // const currentContactObjet = JSON.parse(currentContact);
-
-    // const name = currentContactObjet.name;
-    // const phone = currentContactObjet.phone;
 
     const hone = ele.getElementsByTagName("h1");
     hone[0].innerHTML = "修改联系人";
@@ -369,11 +349,8 @@ function importFile(input) {
 function exportFile(event) {
     // 发送一个网络请求，后端生成csv文件，download
     console.log("!");
-    // sendRequest(baseUrl + "/contact/exportFile", "GET");
     let requestEntity = {};
     requestEntity.method = "GET";
-    // requestEntity.headers
-    // requestEntity.credentials = "same-origin";
     requestEntity.credentials = "include";
     fetch(baseUrl + "contact/exportFile", requestEntity).then(response => response.blob().then(blob => {
         console.log("download csv..");
@@ -394,27 +371,4 @@ async function exit(event) {
     });
     window.location.href = "login.html";
     console.log("exit!");
-}
-
-function sendRequest(url, method, data) {
-    // let username = data.username;
-    // let password = data.password;
-    // let requestEntity = {};
-    // requestEntity.method = method;
-    // requestEntity.headers = { "Content-Type": "application/json" };
-    // requestEntity.body = JSON.stringify({
-    //     username: `${username}`,
-    //     password: `${password}`,
-    // });
-
-    fetch(url, requestEntity).then(
-        response => {
-            console.log(response.status);
-            console.log(response.headers);
-            return response.json();
-        }
-    ).then(json => {
-
-        // todo: 登录的话，记得id存到local storage.
-    });
 }

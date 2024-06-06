@@ -7,20 +7,6 @@
     <title>通讯录管理系统</title>
     <link href="/css/index.css" rel="stylesheet" />
     <script src="../javascript/index.js"></script>
-    <script>
-        // window.onload = function () {
-        //     const login = document.cookie.includes("user");
-        //     console.log(login);
-        //     if (!login) {
-        //         alert("请登录！");
-        //         setTimeout(() => {
-        //             window.location.href = "login.html";
-        //         }, 1000);
-        //     }
-        //     contactList();
-        //     user();
-        // }
-    </script>
 </head>
 
 <body>
@@ -44,9 +30,6 @@
         style="background-color: darkseagreen;;border-bottom: solid 2px rgb(202, 198, 198); margin-left: 2rem;">
         <h1 class="h1">通讯录管理系统</h1>
     </div>
-
-
-
 
     <div id="content-body" style="display: flex; height: 80%;">
         <!-- sidebar -->
@@ -205,7 +188,7 @@
         <!-- add group -->
         <div id="add-group-form" style="flex-basis: 60%; display: none;">
             <div style="height: 100%; width: 100%; padding-left: 2rem;">
-                <form onsubmit="addGroup(this);">
+                <form onsubmit="addGroup(event);">
                     <h1>添加分组</h1>
                     <lable class="table-cell-width-20" style="display: inline-block;">组名称：</lable>
                     <input type="text" name="groupname" placeholder="请输入群名称">

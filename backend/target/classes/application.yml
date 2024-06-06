@@ -1,6 +1,6 @@
 server:
   port: 8800
-  address: localhost.com
+  address: localhost
 
 spring:
   datasource:
